@@ -9,3 +9,10 @@
 
 
 /*****************************************************************************/
+
+void Owner::addProperty(Asset & _property)
+{
+
+	m_Assets.push_back(std::make_unique<Asset>(std::move(_property)));
+
+}

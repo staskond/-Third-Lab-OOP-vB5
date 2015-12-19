@@ -12,12 +12,20 @@
 
 
 class RealEstateAsset
-	:	public Asset
+	: public Asset
 {
+public:
+	RealEstateAsset(RealEstateState _CurrentLevelProperty);
+	RealEstateState GetCurrentLevelProperty() { return m_CurrentLevelProperty; };
+	void CrashProperty() override;
+	void RepairingProperty() override;
+	void GetCost() override;
 
 /*-----------------------------------------------------------------*/
 
-	// TODO
+private:
+	int m_CurrentCost;
+	RealEstateState m_CurrentLevelProperty;
 
 /*-----------------------------------------------------------------*/
 };

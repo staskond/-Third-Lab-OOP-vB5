@@ -16,8 +16,18 @@ class VehicleAsset
 
 /*-----------------------------------------------------------------*/
 
-	// TODO
+public:
 
+	int GetYearsOfUse() { return m_YearsOfUse; };
+	bool GetInjuriesAfterTheAccident() { return m_Accident; };
+
+	void CrashProperty() override;
+	void RepairingProperty() override;
+	void GetCost() override;
+private:
+	int m_CurrentCost;
+	int m_YearsOfUse;
+	bool m_Accident;//true if the property is damaged
 /*-----------------------------------------------------------------*/
 };
 

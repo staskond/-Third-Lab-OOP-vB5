@@ -66,7 +66,7 @@ public:
 	int getVehicleYearsInUse ( std::string const & _ownerFullName, std::string const & _assetName ) const;
 
 	bool isVehicleCrashed ( std::string const & _ownerFullName, std::string const & _assetName ) const;
-
+	
 /*-----------------------------------------------------------------*/
 
 private:
@@ -77,7 +77,7 @@ private:
 
 /*-----------------------------------------------------------------*/
 
-
+	
 };
 
 

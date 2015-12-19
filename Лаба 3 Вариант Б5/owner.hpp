@@ -2,17 +2,26 @@
 
 #ifndef _OWNER_HPP_
 #define _OWNER_HPP_
-
+#include <memory>
+#include "asset.hpp"
+#include <vector>
 /*****************************************************************************/
 
 
 class Owner
+	:public Asset
 {
+
 
 /*-----------------------------------------------------------------*/
 
-	// TODO
+public:
+	Owner(const std::string _FullNameOwner);//...
+	void addProperty(Asset & _property);
 
+private:
+	const std::string m_FullNameOwner;
+	std::vector<std::unique_ptr<Asset>> m_Assets;
 /*-----------------------------------------------------------------*/
 };
 

@@ -10,10 +10,7 @@
 
 /*****************************************************************************/
 
-Owner::Owner(const std::string _FullNameOwner)
-	:m_FullNameOwner(_FullNameOwner)
-{
-}
+
 
 Owner::Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, int _cost)
 	:Asset(_FullNameProperty,_cost)

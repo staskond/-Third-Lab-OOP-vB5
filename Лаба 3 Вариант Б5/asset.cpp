@@ -18,4 +18,7 @@ Asset::Asset(const std::string & _FullNameProperty, double _cost)
 {
 	if (m_cost < 0)
 		throw std::logic_error(Messages::NegativeAssetBaseCost);
+
+	if (_FullNameProperty.empty())
+		throw std::logic_error(Messages::AssetNameEmpty);
 }

@@ -10,6 +10,12 @@
 
 /*****************************************************************************/
 
+VehicleAsset::VehicleAsset(const std::string & _FullNameProperty, double _cost, int _yearOfUse)
+	:Asset(_FullNameProperty, _cost)
+	,m_YearsOfUse(_yearOfUse)
+{
+}
+
 void VehicleAsset::CrashProperty()
 {
 	m_Accident = true;

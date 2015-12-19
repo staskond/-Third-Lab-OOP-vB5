@@ -15,20 +15,19 @@ public:
 
 	virtual ~Asset() = default;
 
-	virtual int GetSumCostOfProperty() { return 0; };
-	virtual void CrashProperty() { };
-	virtual void RepairingProperty() {};
-	virtual int GetCurrentCost() { return 0; };
+	virtual int GetSumCostOfProperty() = 0;
+	virtual void CrashProperty() = 0;
+	virtual void RepairingProperty() = 0;
 
 	const std::string & GetFullNameProperty() const { return m_FullNameProperty; };
 	virtual double GetCost() { return m_cost; };
 
 protected:
-	Asset(const std::string & _FullNameProperty, int _cost);
+	Asset(const std::string & _FullNameProperty, double _cost);
 
 private:
 	const std::string & m_FullNameProperty;
-	int m_cost;
+	double m_cost;
 
 	
 };

@@ -12,7 +12,7 @@
 
 
 
-Owner::Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, int _cost)
+Owner::Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, double _cost)
 	:Asset(_FullNameProperty,_cost)
 	,m_FullNameOwner(_FullNameOwner)
 {

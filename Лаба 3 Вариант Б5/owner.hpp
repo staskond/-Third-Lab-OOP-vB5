@@ -13,11 +13,11 @@ class Owner
 	:public Asset
 {
 
-
+	
 /*-----------------------------------------------------------------*/
 
 public:
-	Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, int _cost);//...
+	Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, double _cost);//...
 	void addProperty(Asset & _property);
 private:
 	const std::string m_FullNameOwner;

@@ -14,6 +14,8 @@ VehicleAsset::VehicleAsset(const std::string & _FullNameProperty, double _cost, 
 	:Asset(_FullNameProperty, _cost)
 	,m_YearsOfUse(_yearOfUse)
 {
+	if (m_YearsOfUse < 0)
+		throw std::logic_error(Messages::NegativeVehicleUseYears);
 }
 
 void VehicleAsset::CrashProperty()

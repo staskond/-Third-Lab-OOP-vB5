@@ -15,7 +15,7 @@ class RealEstateAsset
 	: public Asset
 {
 public:
-	RealEstateAsset( const std::string & _FullNameProperty, int _cost, RealEstateState _CurrentLevelProperty);
+	RealEstateAsset( const std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty);
 	RealEstateState GetCurrentLevelProperty() { return m_CurrentLevelProperty; };
 	void CrashProperty() override;
 	void RepairingProperty() override;

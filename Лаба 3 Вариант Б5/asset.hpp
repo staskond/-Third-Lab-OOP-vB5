@@ -12,8 +12,7 @@
 class Asset
 {
 public:
-	Asset() = default;
-	Asset(const std::string & _FullNameProperty, int _cost);
+
 	virtual ~Asset() = default;
 
 	virtual int GetSumCostOfProperty() { return 0; };
@@ -22,7 +21,10 @@ public:
 	virtual int GetCurrentCost() { return 0; };
 
 	const std::string & _FullNameProperty() const { return m_FullNameProperty; };
-	virtual void GetCost() { return m_cost; };
+	virtual int GetCost() { return m_cost; };
+
+protected:
+	Asset(const std::string & _FullNameProperty, int _cost);
 
 private:
 	const std::string & m_FullNameProperty;

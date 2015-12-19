@@ -16,7 +16,7 @@ class Owner
 /*-----------------------------------------------------------------*/
 
 public:
-	Owner(const std::string _FullNameOwner);//...
+	Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, int _cost);//...
 	void addProperty(Asset & _property);
 
 private:

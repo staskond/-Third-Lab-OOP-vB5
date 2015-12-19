@@ -21,10 +21,13 @@ void VehicleAsset::RepairingProperty()
 		m_Accident = false;
 }
 
-void VehicleAsset::GetCost()
+int VehicleAsset::GetCost()
 {
 	for (int i = 0; i < m_YearsOfUse - 1; i++)
 	{
 		m_CurrentCost -= (m_CurrentCost * 0.15);
 	}
+	if (m_Accident)
+		m_CurrentCost = m_CurrentCost * 0.5;
+	return m_CurrentCost;
 }

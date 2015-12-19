@@ -5,6 +5,7 @@
 #include <memory>
 #include "asset.hpp"
 #include <vector>
+#include "messages.hpp"
 /*****************************************************************************/
 
 
@@ -18,10 +19,9 @@ class Owner
 public:
 	Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, int _cost);//...
 	void addProperty(Asset & _property);
-
 private:
 	const std::string m_FullNameOwner;
-	std::vector<std::unique_ptr<Asset>> m_Assets;
+	std::vector<std::unique_ptr<Asset>> m_assets;
 /*-----------------------------------------------------------------*/
 };
 

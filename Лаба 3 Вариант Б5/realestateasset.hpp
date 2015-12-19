@@ -19,12 +19,12 @@ public:
 	RealEstateState GetCurrentLevelProperty() { return m_CurrentLevelProperty; };
 	void CrashProperty() override;
 	void RepairingProperty() override;
-	int GetCost() override;
+	double GetCost() override;
 
 /*-----------------------------------------------------------------*/
 
 private:
-	int m_CurrentCost;
+	double m_CurrentCost;
 	RealEstateState m_CurrentLevelProperty;
 
 /*-----------------------------------------------------------------*/

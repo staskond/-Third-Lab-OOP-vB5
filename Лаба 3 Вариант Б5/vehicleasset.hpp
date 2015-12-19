@@ -6,7 +6,7 @@
 /*****************************************************************************/
 
 #include "asset.hpp"
-
+#include "messages.hpp"
 /*****************************************************************************/
 
 
@@ -22,9 +22,9 @@ public:
 
 	void CrashProperty() override;
 	void RepairingProperty() override;
-	int GetCost() override;
+	double GetCost() override;
 private:
-	int m_CurrentCost;
+	double m_CurrentCost;
 	int m_YearsOfUse;
 	bool m_Accident;//true if the property is damaged
 /*-----------------------------------------------------------------*/

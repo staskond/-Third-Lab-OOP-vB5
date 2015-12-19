@@ -19,9 +19,11 @@ void VehicleAsset::RepairingProperty()
 {
 	if (m_Accident)
 		m_Accident = false;
+	else
+		throw std::logic_error(Messages::RepairingIdealRealEstate);
 }
 
-int VehicleAsset::GetCost()
+double VehicleAsset::GetCost()
 {
 	for (int i = 0; i < m_YearsOfUse - 1; i++)
 	{

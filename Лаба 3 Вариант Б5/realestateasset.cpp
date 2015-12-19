@@ -33,7 +33,7 @@ void RealEstateAsset::RepairingProperty()
 		++m_CurrentLevelProperty;
 }
 
-int RealEstateAsset::GetCost()
+double RealEstateAsset::GetCost()
 {
 	switch (m_CurrentLevelProperty)
 	{

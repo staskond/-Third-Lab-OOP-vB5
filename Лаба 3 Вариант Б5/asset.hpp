@@ -20,8 +20,8 @@ public:
 	virtual void RepairingProperty() {};
 	virtual int GetCurrentCost() { return 0; };
 
-	const std::string & _FullNameProperty() const { return m_FullNameProperty; };
-	virtual int GetCost() { return m_cost; };
+	const std::string & GetFullNameProperty() const { return m_FullNameProperty; };
+	virtual double GetCost() { return m_cost; };
 
 protected:
 	Asset(const std::string & _FullNameProperty, int _cost);

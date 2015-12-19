@@ -20,7 +20,11 @@ Owner::Owner(const std::string _FullNameOwner, const std::string & _FullNameProp
 
 void Owner::addProperty(Asset & _property)
 {
-
-	m_Assets.push_back(std::make_unique<Asset>(std::move(_property)));
+	for (auto const & pAsset : m_assets)
+		if (_property.GetFullNameProperty() == pAsset->GetFullNameProperty())
+			throw std::logic_error(Messages::AssetNameNotUniqueWithinOwner);
+		else
+			m_assets.push_back(std::make_unique<Asset>(std::move(_property)));
 
 }
+ 

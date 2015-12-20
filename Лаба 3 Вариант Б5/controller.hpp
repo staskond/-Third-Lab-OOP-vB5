@@ -9,12 +9,18 @@
 
 #include <string>
 #include <unordered_set>
+#include "owner.hpp"
+#include "vehicleasset.hpp"
+#include "realestateasset.hpp"
+
 
 /*****************************************************************************/
 
 
 class Controller
+	:public Owner
 {
+
 
 /*-----------------------------------------------------------------*/
 
@@ -73,8 +79,8 @@ private:
 
 /*-----------------------------------------------------------------*/
 
-	// TODO ...
-
+	std::vector<std::string> m_owners;
+//	std::vector<Owner> m_owners;
 /*-----------------------------------------------------------------*/
 
 	

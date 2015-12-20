@@ -17,8 +17,9 @@ class Owner
 /*-----------------------------------------------------------------*/
 
 public:
-	Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, double _cost);//...
+	Owner(const std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost);//...
 	void addProperty(Asset & _property);
+	const std::string & GetFullNameOwner() const { return m_FullNameOwner; }
 private:
 	const std::string m_FullNameOwner;
 	std::vector<std::unique_ptr<Asset>> m_assets;

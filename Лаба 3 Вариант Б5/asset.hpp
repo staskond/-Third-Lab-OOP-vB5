@@ -4,7 +4,6 @@
 #define _ASSET_HPP_
 #include <string>
 #include "messages.hpp"
-#include "realestatestate.hpp"
 #include <memory>
 /*****************************************************************************/
 
@@ -12,7 +11,7 @@
 class Asset
 {
 public:
-
+	
 	virtual ~Asset() = default;
 
 	virtual int GetSumCostOfProperty() = 0;

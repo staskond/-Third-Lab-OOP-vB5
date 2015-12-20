@@ -12,10 +12,14 @@
 
 
 
-Owner::Owner(const std::string _FullNameOwner, const std::string & _FullNameProperty, double _cost)
+
+
+Owner::Owner(const std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost)
 	:Asset(_FullNameProperty,_cost)
 	,m_FullNameOwner(_FullNameOwner)
 {
+	if (m_FullNameOwner.empty())
+		throw std::logic_error(Messages::OwnerNameEmpty);
 }
 
 void Owner::addProperty(Asset & _property)
@@ -23,8 +27,7 @@ void Owner::addProperty(Asset & _property)
 	for (auto const & pAsset : m_assets)
 		if (_property.GetFullNameProperty() == pAsset->GetFullNameProperty())
 			throw std::logic_error(Messages::AssetNameNotUniqueWithinOwner);
-		else
-			m_assets.push_back(std::make_unique<Asset>(std::move(_property)));
+	m_assets.push_back(std::make_unique<Asset>(std::move(_property)));
 
 }
  

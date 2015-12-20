@@ -22,6 +22,8 @@ Owner::Owner(const std::string & _FullNameOwner)
 		throw std::logic_error(Messages::OwnerNameEmpty);
 }
 
+
+
 Asset const * Owner::UniqueAsset(std::string const & _assetName) const
 {
 	auto it = std::find_if(

@@ -11,6 +11,23 @@
 
 /*****************************************************************************/
 
+Owner * Controller::findOwner(std::string const & _ownerFullName) const
+{
+	auto it = m_owners.find(_ownerFullName);
+	return (it == m_owners.end()) ? nullptr : it->second.get();
+}
+
+Owner & Controller::resolveOwner(std::string const & _ownerFullName) const
+{
+	Owner * pOwner = findOwner(_ownerFullName);
+	if (pOwner)
+		return *pOwner;
+
+	throw std::logic_error(Messages::OwnerUnknown);
+}
+
+
+
 void Controller::createOwner(std::string const & _fullName)
 {
 	if (_fullName.empty())
@@ -68,19 +85,39 @@ std::unordered_set<std::string> Controller::getOwnerAssetNames(std::string const
 	return _names;
 }
 
-
-
-Owner * Controller::findOwner(std::string const & _ownerFullName) const
+double Controller::getOwnerAssetsCurrentCost(std::string const & _ownerFullName) const
 {
-	auto it = m_owners.find(_ownerFullName);
-	return (it == m_owners.end()) ? nullptr : it->second.get();
+	double sumCurrentCost = 0;
+
+	const Owner & temp = resolveOwner(_ownerFullName);
+
+	for (auto const & _pAsset : temp.getAssets())
+		sumCurrentCost += _pAsset->GetCost();
+	return sumCurrentCost;
 }
 
-Owner & Controller::resolveOwner(std::string const & _ownerFullName) const
+double Controller::getAssetBaseCost(std::string const & _ownerFullName, std::string const & _assetName) const
 {
-	Owner * pOwner = findOwner(_ownerFullName);
-	if (pOwner)
-		return *pOwner;
-
-	throw std::logic_error(Messages::OwnerUnknown);
+	const Owner & temp = resolveOwner(_ownerFullName);
+	return temp.findAsset(_assetName)->GetBasicCost();
 }
+
+double Controller::getAssetCurrentCost(std::string const & _ownerFullName, std::string const & _assetName) const
+{
+	const Owner & temp = resolveOwner(_ownerFullName);
+	temp.findAsset(_assetName)->GetCost();
+}
+
+void Controller::repair(std::string const & _ownerFullName, std::string const & _assetName)
+{
+	const Owner & temp = resolveOwner(_ownerFullName);
+	temp.findAsset(_assetName)->RepairingProperty();
+}
+
+void Controller::damage(std::string const & _ownerFullName, std::string const & _assetName)
+{
+	const Owner & temp = resolveOwner(_ownerFullName);
+	temp.findAsset(_assetName)->CrashProperty();
+}
+
+

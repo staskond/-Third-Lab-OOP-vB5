@@ -20,7 +20,7 @@ public:
 	RealEstateState GetCurrentLevelProperty() { return m_CurrentLevelProperty; };
 	void CrashProperty() override;
 	void RepairingProperty() override;
-	const double GetCost() const override;
+	double GetCost() const override;
 
 /*-----------------------------------------------------------------*/
 

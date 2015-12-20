@@ -21,7 +21,7 @@ public:
 	int GetYearsOfUse() { return m_YearsOfUse; };
 	void CrashProperty() override;
 	void RepairingProperty() override;
-	const double GetCost() const override;
+	double GetCost() const override;
 private:
 	double m_CurrentCost;
 	int m_YearsOfUse;

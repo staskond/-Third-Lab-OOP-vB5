@@ -13,12 +13,11 @@ class Asset
 public:
 	
 	virtual ~Asset() = default;
-//	virtual int GetSumCostOfProperty() = 0;
 	virtual void CrashProperty() = 0;
 	virtual void RepairingProperty() = 0;
-
 	const std::string & GetFullNameProperty() const { return m_FullNameProperty; };
-	virtual const double GetCost() const { return m_cost; };
+	virtual double GetCost() const = 0;
+	const double GetBasicCost() const { return m_cost };
 
 protected:
 	Asset(const std::string & _FullNameProperty, double _cost);

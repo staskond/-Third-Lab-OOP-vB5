@@ -13,9 +13,12 @@
 
 
 
+
+
 RealEstateAsset::RealEstateAsset(const std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty)
-	: Asset(_FullNameProperty, _cost)
-	,m_CurrentLevelProperty(_CurrentLevelProperty)
+	:Asset(_FullNameProperty, _cost)
+	, m_CurrentLevelProperty(_CurrentLevelProperty)
+	, m_CurrentCost(_cost)
 {
 }
 
@@ -33,7 +36,7 @@ void RealEstateAsset::RepairingProperty()
 		++m_CurrentLevelProperty;
 }
 
-const double RealEstateAsset::GetCost() const
+double RealEstateAsset::GetCost() const
 {
 	double temp = m_CurrentCost;
 	switch (m_CurrentLevelProperty)

@@ -6,22 +6,46 @@
 #include "asset.hpp"
 #include <vector>
 #include "messages.hpp"
-#include "realestateasset.hpp"
+
 /*****************************************************************************/
 
 
 class Owner
-	:public Asset, RealEstateAsset
 {
 
 	
 /*-----------------------------------------------------------------*/
 
 public:
-	Owner(const std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost);
-//	Owner(std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost, RealEstateAsset _CurrentLevelProperty);//...
+	Owner(const std::string &_FullNameOwner);
 
-	void addProperty(Asset & _property);
+
+	typedef std::vector< std::unique_ptr< Asset > >::const_iterator AssetIterator;
+
+	AssetIterator assetsBegin() const;
+
+	AssetIterator assetsEnd() const;
+
+	class IterableAssets
+	{
+	public:
+
+		IterableAssets(AssetIterator _chaptersBegin, AssetIterator _chaptersEnd)
+			: m_begin(_chaptersBegin), m_end(_chaptersEnd)
+		{}
+
+		AssetIterator begin() const { return m_begin; }
+		AssetIterator end() const { return m_end; }
+
+	private:
+
+		AssetIterator m_begin, m_end;
+	};
+
+
+
+	Asset const * findAsset(std::string const & _name) const;
+	void addProperty(std::unique_ptr< Asset > _assets);
 	const std::string & GetFullNameOwner() const { return m_FullNameOwner; }
 private:
 	const std::string m_FullNameOwner;

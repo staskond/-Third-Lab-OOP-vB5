@@ -13,7 +13,7 @@
 
 
 
-RealEstateAsset::RealEstateAsset(std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty)
+RealEstateAsset::RealEstateAsset(const std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty)
 	: Asset(_FullNameProperty, _cost)
 	,m_CurrentLevelProperty(_CurrentLevelProperty)
 {
@@ -33,24 +33,25 @@ void RealEstateAsset::RepairingProperty()
 		++m_CurrentLevelProperty;
 }
 
-double RealEstateAsset::GetCost()
+const double RealEstateAsset::GetCost() const
 {
+	double temp = m_CurrentCost;
 	switch (m_CurrentLevelProperty)
 	{
 	case RealEstateState::Ideal:
-		m_CurrentCost -= (m_CurrentCost * 0.0);
+		temp -= (temp * 0.0);
 		break;
 	case RealEstateState::CosmeticRepairs:
-		m_CurrentCost -= (m_CurrentCost * 0.15);
+		temp -= (temp * 0.15);
 		break;
 	case RealEstateState::CapitalRepairs:
-		m_CurrentCost -= (m_CurrentCost * 0.3);
+		temp -= (temp * 0.3);
 		break;
 	case RealEstateState::Construction:
-		m_CurrentCost -= (m_CurrentCost * 0.5);
+		temp -= (temp * 0.5);
 		break;
 	default:
 		break;
 	}
-	return m_CurrentCost;
+
 }

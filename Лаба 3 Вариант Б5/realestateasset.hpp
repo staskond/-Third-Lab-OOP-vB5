@@ -8,6 +8,7 @@
 #include "asset.hpp"
 #include "realestatestate.hpp"
 #include "owner.hpp"
+#include <iostream>
 /*****************************************************************************/
 
 
@@ -15,17 +16,16 @@ class RealEstateAsset
 	: public Asset
 {
 public:
-	RealEstateAsset();
-	RealEstateAsset(std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty);
+	RealEstateAsset(const std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty);
 	RealEstateState GetCurrentLevelProperty() { return m_CurrentLevelProperty; };
 	void CrashProperty() override;
 	void RepairingProperty() override;
-	double GetCost() override;
+	const double GetCost() const override;
 
 /*-----------------------------------------------------------------*/
 
 private:
-	double m_CurrentCost;
+	const double m_CurrentCost;
 	RealEstateState m_CurrentLevelProperty;
 
 /*-----------------------------------------------------------------*/

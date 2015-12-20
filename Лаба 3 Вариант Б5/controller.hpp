@@ -12,13 +12,13 @@
 #include "owner.hpp"
 #include "vehicleasset.hpp"
 #include "realestateasset.hpp"
-
+#include <unordered_map>
 
 /*****************************************************************************/
 
+class Owner;
 
 class Controller
-	:public Owner
 {
 
 
@@ -27,14 +27,13 @@ class Controller
 public:
 
 /*-----------------------------------------------------------------*/
+	Controller() = default;
 
-	Controller ();
+	Controller(const Controller &) = delete;
 
-	Controller ( const Controller & ) = delete;
+	Controller & operator = (const Controller &) = delete;
 
-	Controller & operator = ( const Controller & ) = delete;
-	
-	~ Controller ();
+	~Controller() = default;
 
 /*-----------------------------------------------------------------*/
 
@@ -73,14 +72,18 @@ public:
 
 	bool isVehicleCrashed ( std::string const & _ownerFullName, std::string const & _assetName ) const;
 	
+	Owner * findOwner(std::string const & _name) const;
+	Owner & resolveOwner(std::string const & _ownerName) const;
 /*-----------------------------------------------------------------*/
 
 private:
 
 /*-----------------------------------------------------------------*/
-
-	std::vector<std::string> m_owners;
-	std::vector<std::unique_ptr<Owner>> m_pOwners;
+	
+//	std::vector<std::string> m_owners;
+//	std::vector<std::unique_ptr<Owner>> m_pOwners;
+	
+	std::unordered_map< std::string, std::unique_ptr< Owner > > m_owners;
 /*-----------------------------------------------------------------*/
 
 	

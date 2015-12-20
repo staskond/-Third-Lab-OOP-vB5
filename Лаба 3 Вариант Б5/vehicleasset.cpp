@@ -43,5 +43,5 @@ const double VehicleAsset::GetCost() const
 	}
 	if (m_Accident)
 		temp = temp * 0.5;
-	
+	return temp;
 }

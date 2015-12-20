@@ -39,7 +39,6 @@ const double RealEstateAsset::GetCost() const
 	switch (m_CurrentLevelProperty)
 	{
 	case RealEstateState::Ideal:
-		temp -= (temp * 0.0);
 		break;
 	case RealEstateState::CosmeticRepairs:
 		temp -= (temp * 0.15);
@@ -53,5 +52,7 @@ const double RealEstateAsset::GetCost() const
 	default:
 		break;
 	}
+
+	return temp;
 
 }

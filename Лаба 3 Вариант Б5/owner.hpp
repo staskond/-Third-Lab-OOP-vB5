@@ -6,18 +6,21 @@
 #include "asset.hpp"
 #include <vector>
 #include "messages.hpp"
+#include "realestateasset.hpp"
 /*****************************************************************************/
 
 
 class Owner
-	:public Asset
+	:public Asset, RealEstateAsset
 {
 
 	
 /*-----------------------------------------------------------------*/
 
 public:
-	Owner(const std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost);//...
+	Owner(const std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost);
+//	Owner(std::string &_FullNameOwner, const std::string & _FullNameProperty, double _cost, RealEstateAsset _CurrentLevelProperty);//...
+
 	void addProperty(Asset & _property);
 	const std::string & GetFullNameOwner() const { return m_FullNameOwner; }
 private:

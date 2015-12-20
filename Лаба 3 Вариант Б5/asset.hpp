@@ -13,8 +13,8 @@ class Asset
 public:
 	
 	virtual ~Asset() = default;
-
-	virtual int GetSumCostOfProperty() = 0;
+	Asset();
+//	virtual int GetSumCostOfProperty() = 0;
 	virtual void CrashProperty() = 0;
 	virtual void RepairingProperty() = 0;
 

@@ -33,7 +33,8 @@ void Controller::addRealEstate(std::string const & _ownerFullName, std::string c
 	if (_baseCost < 0)
 		throw std::logic_error(Messages::NegativeAssetBaseCost);
 
-	Owner(_ownerFullName, _assetName, _baseCost)
+	m_pOwners.push_back(std::make_unique<Owner>(std::move(_ownerFullName, _assetName, _baseCost)));//
+
 	
 
 }

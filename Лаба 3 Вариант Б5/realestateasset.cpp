@@ -13,7 +13,7 @@
 
 
 
-RealEstateAsset::RealEstateAsset(const std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty)
+RealEstateAsset::RealEstateAsset(std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty)
 	: Asset(_FullNameProperty, _cost)
 	,m_CurrentLevelProperty(_CurrentLevelProperty)
 {

@@ -80,7 +80,7 @@ private:
 /*-----------------------------------------------------------------*/
 
 	std::vector<std::string> m_owners;
-//	std::vector<Owner> m_owners;
+	std::vector<std::unique_ptr<Owner>> m_pOwners;
 /*-----------------------------------------------------------------*/
 
 	

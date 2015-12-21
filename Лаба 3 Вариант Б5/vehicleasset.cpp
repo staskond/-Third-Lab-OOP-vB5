@@ -14,7 +14,6 @@ VehicleAsset::VehicleAsset(const std::string & _FullNameProperty, double _cost, 
 	:Asset(_FullNameProperty, _cost)
 	,m_YearsOfUse(_yearOfUse)
 	,m_Accident(_Accident)
-	,m_CurrentCost(_cost)
 {
 	if (m_YearsOfUse < 0)
 		throw std::logic_error(Messages::NegativeVehicleUseYears);
@@ -27,18 +26,18 @@ void VehicleAsset::CrashProperty()
 
 void VehicleAsset::RepairingProperty()
 {
-	if (m_Accident) {
+	
+	if (HasAccident())
 		m_Accident = false;
-		m_CurrentCost *= 2;
-	}
 	else
-		throw std::logic_error(Messages::RepairingIdealRealEstate);
+		throw std::logic_error(Messages::RepairingWorkingVehicle);
+
 }
 
 double VehicleAsset::GetCost() const
 {
-	double temp = m_CurrentCost;
-	for (int i = 0; i < m_YearsOfUse - 1; i++)
+	double temp = GetBasicCost();
+	for (int i = 0; i < m_YearsOfUse; i++)
 	{
 		temp -= (temp * 0.15);
 	}

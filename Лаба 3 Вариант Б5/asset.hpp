@@ -17,12 +17,13 @@ public:
 	virtual void RepairingProperty() = 0;
 	const std::string & GetFullNameProperty() const { return m_FullNameProperty; };
 	virtual double GetCost() const = 0;
-	const double GetBasicCost() const { return m_cost };
+	const double GetBasicCost() const{ return m_cost; };
 
 protected:
 	Asset(const std::string & _FullNameProperty, double _cost);
+
 private:
-	const std::string & m_FullNameProperty;
+	const std::string m_FullNameProperty;
 	const double m_cost;
 
 	

@@ -18,44 +18,46 @@
 RealEstateAsset::RealEstateAsset(const std::string & _FullNameProperty, double _cost, RealEstateState _CurrentLevelProperty)
 	:Asset(_FullNameProperty, _cost)
 	, m_CurrentLevelProperty(_CurrentLevelProperty)
-	, m_CurrentCost(_cost)
 {
 }
 
 void RealEstateAsset::CrashProperty()
 {
-	if (!(m_CurrentLevelProperty == RealEstateState::CapitalRepairs))
-		--m_CurrentLevelProperty;
+	auto it = GetCurrentLevelProperty();
+	m_CurrentLevelProperty = ++it;;
 }
 
 void RealEstateAsset::RepairingProperty()
 {
-	if (m_CurrentLevelProperty == RealEstateState::Ideal)
+	auto it = GetCurrentLevelProperty();
+	if (it == RealEstateState::Ideal)
 		throw std::logic_error(Messages::RepairingIdealRealEstate);
 	else
-		++m_CurrentLevelProperty;
+		m_CurrentLevelProperty = --it;
 }
 
 double RealEstateAsset::GetCost() const
 {
-	double temp = m_CurrentCost;
-	switch (m_CurrentLevelProperty)
+	double temp = GetBasicCost();
+	switch (GetCurrentLevelProperty())
 	{
 	case RealEstateState::Ideal:
+		return temp;
 		break;
 	case RealEstateState::CosmeticRepairs:
 		temp -= (temp * 0.15);
+		return temp;
 		break;
 	case RealEstateState::CapitalRepairs:
 		temp -= (temp * 0.3);
+		return temp;
 		break;
 	case RealEstateState::Construction:
 		temp -= (temp * 0.5);
+		return temp;
 		break;
 	default:
 		break;
 	}
-
-	return temp;
-
+	
 }

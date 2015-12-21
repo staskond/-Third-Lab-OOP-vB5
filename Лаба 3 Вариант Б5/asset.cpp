@@ -14,7 +14,7 @@
 
 
 
-Asset::Asset(std::string & _FullNameProperty, double _cost)
+Asset::Asset(const std::string & _FullNameProperty, double _cost)
 	:m_FullNameProperty(_FullNameProperty),
 	m_cost(_cost)
 {

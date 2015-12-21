@@ -359,7 +359,6 @@ DECLARE_OOP_TEST ( test_create_multiple_vehicles_try_cost )
 
 /*****************************************************************************/
 
-
 DECLARE_OOP_TEST ( test_create_multiple_real_estates_try_cost )
 {
 	Controller c;

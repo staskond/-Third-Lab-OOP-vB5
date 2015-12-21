@@ -17,13 +17,14 @@ Owner * Controller::findOwner(std::string const & _ownerFullName) const
 	return (it == m_owners.end()) ? nullptr : it->second.get();
 }
 
+
 Owner & Controller::resolveOwner(std::string const & _ownerFullName) const
 {
 	Owner * pOwner = findOwner(_ownerFullName);
 	if (pOwner)
 		return *pOwner;
-
-	throw std::logic_error(Messages::OwnerUnknown);
+	else
+		throw std::logic_error(Messages::OwnerUnknown);
 }
 
 
@@ -33,8 +34,9 @@ void Controller::createOwner(std::string const & _fullName)
 	if (_fullName.empty())
 		throw std::logic_error(Messages::OwnerNameEmpty);
 
-		if (findOwner(_fullName))
+		if (m_owners.find(_fullName) != m_owners.end())
 			throw std::logic_error(Messages::OwnerNameNotUnique);
+
 	m_owners[_fullName] = std::make_unique< Owner >(_fullName);
 }
 
@@ -55,8 +57,9 @@ void Controller::addRealEstate(std::string const & _ownerFullName, std::string c
 
 	auto temp = m_owners.find(_ownerFullName);
 	temp->second->UniqueAsset(_assetName);
-	m_owners[_ownerFullName] = std::make_unique< Owner >(_ownerFullName, _assetName, _baseCost, _initialState);
-
+	std::unique_ptr <Asset> EstateAsset = std::make_unique<RealEstateAsset>(_assetName, _baseCost, _initialState);
+	m_owners.find(_ownerFullName)->second->addProperty(std::move(EstateAsset));
+	
 }
 
 void Controller::addVehicle(std::string const & _ownerFullName, std::string const & _assetName, double _baseCost, int _yearsInUse, bool _hadAccidents)
@@ -70,7 +73,11 @@ void Controller::addVehicle(std::string const & _ownerFullName, std::string cons
 	if (_baseCost < 0)
 		throw std::logic_error(Messages::NegativeAssetBaseCost);
 
-	m_owners[_ownerFullName] = std::make_unique< Owner >(_ownerFullName, _assetName, _baseCost, _yearsInUse, _hadAccidents);
+	auto temp = m_owners.find(_ownerFullName);
+	temp->second->UniqueAsset(_assetName);
+	std::unique_ptr<Asset> VAsset = std::make_unique<VehicleAsset>(_assetName, _baseCost, _yearsInUse, _hadAccidents);
+
+	m_owners.find(_ownerFullName)->second->addProperty(std::move(VAsset));
 }
 
 std::unordered_set<std::string> Controller::getOwnerAssetNames(std::string const & _ownerFullName) const
@@ -79,8 +86,8 @@ std::unordered_set<std::string> Controller::getOwnerAssetNames(std::string const
 
 	const Owner & temp = resolveOwner(_ownerFullName);
 
-	for (auto const & _pAsset : temp.getAssets())
-		_names.insert(_pAsset->GetFullNameProperty());
+	for (auto const & pAsset : temp.getAssets())
+		_names.insert(pAsset->GetFullNameProperty());
 
 	return _names;
 }
@@ -91,8 +98,8 @@ double Controller::getOwnerAssetsCurrentCost(std::string const & _ownerFullName)
 
 	const Owner & temp = resolveOwner(_ownerFullName);
 
-	for (auto const & _pAsset : temp.getAssets())
-		sumCurrentCost += _pAsset->GetCost();
+	for (auto const & pAsset : temp.getAssets())
+		sumCurrentCost += pAsset->GetCost();
 	return sumCurrentCost;
 }
 
@@ -105,12 +112,13 @@ double Controller::getAssetBaseCost(std::string const & _ownerFullName, std::str
 double Controller::getAssetCurrentCost(std::string const & _ownerFullName, std::string const & _assetName) const
 {
 	const Owner & temp = resolveOwner(_ownerFullName);
-	temp.findAsset(_assetName)->GetCost();
+	return temp.findAsset(_assetName)->GetCost();
 }
 
 void Controller::repair(std::string const & _ownerFullName, std::string const & _assetName)
 {
 	const Owner & temp = resolveOwner(_ownerFullName);
+
 	temp.findAsset(_assetName)->RepairingProperty();
 }
 
@@ -118,6 +126,45 @@ void Controller::damage(std::string const & _ownerFullName, std::string const & 
 {
 	const Owner & temp = resolveOwner(_ownerFullName);
 	temp.findAsset(_assetName)->CrashProperty();
+}
+
+RealEstateState Controller::getRealEstateState(std::string const & _ownerFullName, std::string const & _assetName) const
+{
+	const Owner & temp = resolveOwner(_ownerFullName);
+
+	const RealEstateAsset * pRAsset = dynamic_cast<const RealEstateAsset *>(temp.findAsset(_assetName));
+
+	if (pRAsset)
+		return pRAsset->GetCurrentLevelProperty();
+	else
+		throw std::logic_error(Messages::NotRealEstateAsset);
+}
+
+int Controller::getVehicleYearsInUse(std::string const & _ownerFullName, std::string const & _assetName) const
+{
+	const Owner & temp = resolveOwner(_ownerFullName);
+
+	const VehicleAsset * pVAsset = dynamic_cast<const VehicleAsset *>(temp.findAsset(_assetName));
+
+	if (pVAsset)
+		return pVAsset->GetYearsOfUse();
+	else
+		throw std::logic_error(Messages::NotVehicleAsset);
+}
+
+bool Controller::isVehicleCrashed(std::string const & _ownerFullName, std::string const & _assetName) const
+{
+	const Owner & temp = resolveOwner(_ownerFullName);
+
+	VehicleAsset * pVAsset = dynamic_cast<VehicleAsset *>(temp.findAsset(_assetName));
+
+	if (pVAsset)
+		if (pVAsset->HasAccident())
+			return true;
+		else
+			return false;
+	else
+		throw std::logic_error(Messages::NotVehicleAsset);
 }
 
 

@@ -24,7 +24,7 @@ Owner::Owner(const std::string & _FullNameOwner)
 
 
 
-Asset const * Owner::UniqueAsset(std::string const & _assetName) const
+Asset * Owner::UniqueAsset(std::string const & _assetName) const
 {
 	auto it = std::find_if(
 		m_assets.begin(), m_assets.end(),
@@ -41,13 +41,13 @@ Asset const * Owner::UniqueAsset(std::string const & _assetName) const
 }
 
 
-Asset const * Owner::findAsset(std::string const & _name) const
+Asset * Owner::findAsset(std::string const & _name) const
 {
 	auto it = std::find_if(
 		m_assets.begin(), m_assets.end(),
 		[&](auto const & _asset)
 	{
-		return _asset->getName() == _name;
+		return _asset->GetFullNameProperty() == _name;
 	}
 	);
 

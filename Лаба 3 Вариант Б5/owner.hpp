@@ -47,8 +47,8 @@ public:
 	};
 
 	IterableAssets getAssets() const;
-	Asset const * UniqueAsset(std::string const & _assetName) const;
-	Asset const * findAsset(std::string const & _name) const;
+	Asset * UniqueAsset(std::string const & _assetName) const;
+	Asset * findAsset(std::string const & _name) const;
 	void addProperty(std::unique_ptr< Asset > _assets);
 	const std::string & GetFullNameOwner() const { return m_FullNameOwner; }
 private:

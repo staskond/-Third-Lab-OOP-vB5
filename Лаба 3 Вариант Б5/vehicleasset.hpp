@@ -11,17 +11,18 @@
 
 
 class VehicleAsset
-	:	public Asset
+	: public Asset
 {
 
-/*-----------------------------------------------------------------*/
+	/*-----------------------------------------------------------------*/
 
 public:
 	VehicleAsset(const std::string & _FullNameProperty, double _cost, int _yearOfUse, bool _Accident);
-	int GetYearsOfUse() { return m_YearsOfUse; };
+	int GetYearsOfUse() const { return m_YearsOfUse; };
 	void CrashProperty() override;
 	void RepairingProperty() override;
 	double GetCost() const override;
+	bool HasAccident() const { return m_Accident; };
 private:
 	double m_CurrentCost;
 	int m_YearsOfUse;
